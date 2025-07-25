@@ -1,0 +1,35 @@
+name: Daily Growatt ↔️ Mongo Sync
+
+on:
+  # Schedule to run at 19:00 UTC every day, which is 12:30 AM IST.
+  # This timing ensures the full previous day's data is available.
+  schedule:
+    - cron: '30 2 * * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  pull-growatt-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Python script
+        # Use repository secrets to securely pass your credentials as environment variables
+        env:
+          GROWATT_PLANT_ID: ${{ secrets.GROWATT_PLANT_ID }}
+          GROWATT_TOKEN: ${{ secrets.GROWATT_TOKEN }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        run: python scr/ingest/pull_daily_actions.py 
