@@ -4,7 +4,7 @@ Create MongoDB DB + collections with validators & indexes.
 Run once:   python src/setup_db.py
 """
 
-import os, sys
+import os
 from dotenv import load_dotenv
 from pymongo import MongoClient, errors
 
@@ -29,7 +29,7 @@ db["power_readings"].create_index(
     [("plant_id", 1), ("timestamp", 1)],
     name="plant_ts_idx"
 )
-    
+
 # ---------- 2) Daily energy summary ----------
 db.create_collection(
     "daily_energy",
