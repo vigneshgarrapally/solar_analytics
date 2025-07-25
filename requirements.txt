@@ -1,4 +1,7 @@
-dnspython==2.7.0
 pymongo==4.13.2
 python-dotenv==1.1.1
 growattserver==1.7.1
+python-dateutil
+pandas==2.3.1
+plotly==6.2.0
+streamlit==1.47.1
