@@ -32,4 +32,4 @@ jobs:
           GROWATT_PLANT_ID: ${{ secrets.GROWATT_PLANT_ID }}
           GROWATT_TOKEN: ${{ secrets.GROWATT_TOKEN }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
-        run: python scr/ingest/pull_daily_actions.py 
+        run: python solar_analytics/scr/ingest/pull_daily_actions.py 
